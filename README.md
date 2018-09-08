@@ -6,7 +6,36 @@ Aprendiendo a hacer un feed de películas, para la asignatura Analisis y Diseño
 - Express
 - Angular-Cli
 - Node.js
-
+# Rutas del Proyecto
+-PeliSans
+    -e2e
+    -server
+        -api.js
+        -config.js
+    -src
+        -app
+            -app
+                -card
+                    -feed
+                    -insert-peli
+                    -navbar
+                    -servicios
+                    -app-routing.module.ts
+                    -app.component.css
+                    -app.component.html
+                    -app.component.spec.ts
+                    -app.component.ts
+                    -app.module.ts
+        -assets
+            -images
+                -ticket
+        -environments
+        -index.html
+        -styles.css
+        -archivos
+    -server.js
+    -[].json
+    -README.md
 # Creando la nueva aplicación
 Primero creamos la app de Angular desde el terminal con el siguiente código:
 ~~~
@@ -44,7 +73,7 @@ const { Client } = require('pg');
 
 const client = new Client({
   host: 'localhost',
-  port: 'port' //suele ser 5432,
+  port: 'port', //suele ser 5432,
   user: 'username',
   password: 'password',
   database: 'database',
@@ -124,7 +153,7 @@ server.listen(port,()=> console.log(`API corriendo en el puerto:${port}`));
 
 # Integrando la Base de Datos
 
-Para lograr integrar la base de datos a nuestra aplicación, nos serviremos de de nuestro archivo **api.js**, así que primero exportamos al mismo config 
+Para lograr integrar la base de datos a nuestra aplicación, nos serviremos de nuestro archivo **config.js**, así que vamos a `PeliSans/server/api.js` e importamos config: 
 
 ~~~ 
     const db = require('./config');
@@ -150,7 +179,7 @@ Para lograr integrar la base de datos a nuestra aplicación, nos serviremos de d
 ~~~ 
 - any es para retornar cualquier numero de resultados (tambien existe one/many/none/result para mas [info])
 
-- ahora si podemos ver los datos obtenidos de la base de datos, ejecuta el comando `node server` por el terminal, y luego en el navegador dirígete a la dirección `localhost:3000/api/v1/entradas`, ahí se verán los registros obtenidos.
+- ahora si podemos ver los datos obtenidos de la base de datos, ejecuta el comando `node server` por el terminal, y luego en el navegador dirígete a la dirección [localhost:3000/api/v1/entradas], ahí se verán los registros obtenidos.
 
 # Componentes
 
@@ -584,3 +613,4 @@ a, h1, h4, label{
 
 [info]: <https://mherman.org/blog/designing-a-restful-api-with-node-and-postgres/>
 [imagen]: <https://pixabay.com/es/admisi%C3%B3n-cup%C3%B3n-admitir-carnaval-2974645/>
+[localhost:3000/api/v1/entradas]: <localhost:3000/api/v1/entradas>
