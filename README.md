@@ -554,7 +554,7 @@ const routes: Routes = [
 # BONUS
 
 Jugaremos con estilos y diseño de la página
-* Dirígete a `PeliSans\src\assets` y crea una carpeta llamada **images**, luego descarga esta [imagen] y guárdala en **images**
+* Dirígete a `PeliSans\src\assets` y crea una carpeta llamada **images**, luego descarga esta [imagen] y guárdala en **images** con el nombre de **ticket**
 * Por último añade esta serie de estilos en `PeliSans\src\styles.css`:
 
 ~~~

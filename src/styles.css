@@ -1,1 +1,53 @@
 /* You can add global styles to this file, and also import other style files */
+
+* { padding: 0; margin: 0; }
+html, body, #fullheight {
+    min-height: 100% !important;
+    height: 100%;
+    background: url('./assets/images/ticket.jpg');
+    overflow-x: hidden;
+}
+
+p{
+    color: rgb(0, 0, 0) !important
+}
+a, h1, h4, label{
+    color: rgb(255, 255, 255) !important
+}
+.navbar{
+    background-color: rgba(255, 115, 0, 0.632) !important;
+    color: white;
+}
+.card-header, .card{
+    background-color: rgba(255, 115, 0, 0.632) !important;
+}
+.card-body{
+    background-color: rgb(255, 255, 255) !important;
+}
+.card:hover{
+    -webkit-transform: scale(1.2);
+    -ms-transform: scale(1.2);
+    transform: scale(1.2);
+    transition: 0.15s ease;
+    z-index: 1000;
+  }
+.card:hover,.card-body:hover{
+  
+    background-color: rgb(245, 0, 87);
+    border-color: white;
+    color: white;
+}
+
+.btn{
+    margin-left: 20.5%;
+    background-color: rgba(218, 141, 0, 0.849) !important;
+    border-color: rgba(218, 141, 0, 0.849);
+}
+.btn:hover{
+    background-color: rgba(255, 166, 2, 0.972) !important;
+    border-color: rgba(255, 167, 3, 0.849);
+}
+.disenno{
+    background-color: rgba(218, 141, 0, 0.849);
+    padding: 0.7%;
+}
