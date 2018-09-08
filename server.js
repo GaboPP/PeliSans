@@ -15,14 +15,14 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
 /* Static Path */
-app.use(express.static(path.join(__dirname, 'dist')));
+app.use(express.static(path.join(__dirname, 'dist/PeliSans')));
 
 /* Ruta para nuestra API */
 app.use('/api/v1', api);
 
 /* Todas las rutas no dirigidas a la API se las enviamos a angular */
 app.get('*', (req, res) =>{
-    res.sendFile(path.join(__dirname, 'dist/index.html'));
+    res.sendFile(path.join(__dirname, 'dist/PeliSans/index.html'));
 });
 
 /* Setear el puerto donde se escucharán las peticiones */

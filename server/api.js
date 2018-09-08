@@ -23,4 +23,24 @@ router.get('/entradas', (req, res, next) =>{
     });
 });
 
+router.post('/entrada',(req, res)=>{
+    var query = "INSERT INTO peliculas (titulo, comentario, fecha_estreno) VALUES('"+req.body.titulo+"', '"+req.body.comentario+"', '"+req.body.Fecha+"')";
+    db.query(query, function(err, rows){
+        if(err){
+            res.status(500).send({
+                body:{
+                    result:"error"
+                }
+            });
+        }
+        else{
+            return res.status(200).send({
+                body:{
+                    result:"OK"
+                }
+            });
+        }
+    });
+});
+
 module.exports = router;

@@ -111,7 +111,6 @@ Esto para crear un manejador de rutas montables y modulares, en este archivo pod
 
 - En PeliSans crea el archivo server.js, con el siguiente código
 ~~~ 
-
 /* Librerias */
 const express = require('express');
 const path = require('path');
@@ -129,14 +128,14 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
 /* Static Path */
-app.use(express.static(path.join(__dirname, 'dist')));
+app.use(express.static(path.join(__dirname, 'dist/PeliSans')));
 
 /* Ruta para nuestra API */
 app.use('/api/v1', api);
 
-/* Todas las rutas no dirigídas a la API se las enviamos a angular */
+/* Todas las rutas no dirigidas a la API se las enviamos a angular */
 app.get('*', (req, res) =>{
-    res.sendFile(path.join(__dirname, 'dist/index.html'));
+    res.sendFile(path.join(__dirname, 'dist/PeliSans/index.html'));
 });
 
 /* Setear el puerto donde se escucharán las peticiones */
@@ -146,7 +145,6 @@ app.set('port', port);
 /* Levantamos el servidor */
 const server = http.createServer(app);
 server.listen(port,()=> console.log(`API corriendo en el puerto:${port}`));
-
 ~~~ 
 
 - ahora podemos ver que la web esta corriendo con el comando `node server` por el terminal, y luego en el navegador dirígete a la dirección `localhost:3000/api/v1/`
@@ -220,15 +218,21 @@ ng generate service entradas
 - creamos una función para obtener los datos de la API
 
 ~~~ 
+import { Injectable } from '@angular/core';
 import { Http } from '@angular/http';
 import 'rxjs/add/operator/map';
 
-constructor(private http: Http) { }
+@Injectable({
+  providedIn: 'root'
+})
+export class EntradasService {
+  constructor(private http: Http) { }
+  
+  getEntradas(){
+    return this.http.get('/api/v1/entradas').map(res => res.json());
+  };
 
-getEntradas(){
-  return this.http.get('/api/v1/entradas').map(res => res.json());
-};
-
+}
 ~~~ 
 
 - Para que el servicio suministre a los componentes debemos importarlo en `PeliSans\src\app\app.module.ts`, con el modulo Http para los requests: 
@@ -283,7 +287,7 @@ Por último nos vamos al html de feed, en `\src\app\feed\feed.component.html` e 
     </ul>
 ~~~
 
-Si ejecutamos el proyecto (`ng build; node server`) podremos ver los datos en pantalla, en `localhost:3000`.
+Si ejecutamos el proyecto (`ng build; node server`) podremos ver los datos en pantalla, en [localhost:3000], pero antes borra en `PeliSans\src\app\app.component.html` todo lo anterior en `<router-outlet></router-outlet>`.
 
 # Boostrap
 
@@ -456,9 +460,9 @@ En su html vamos a copiar un form de bootstrap y modificarlo para nuestros fines
   <div class="col-md-1"></div>
 </div>
 ~~~
--Para lograr hacer el bind en los forms de ngModel importamos Forms en `app.component.ts`
+-Para lograr hacer el bind en los forms de ngModel importamos Forms en `app.module.ts`
 
-~~
+~~~
 import { FormsModule } from '@angular/forms';
 
 @NgModule({
@@ -476,7 +480,7 @@ import { FormsModule } from '@angular/forms';
     HttpModule,
     FormsModule
   ],
-~~
+~~~
 Ahora crearemos el script que rescatara los datos y los procesará
 - primero debemos crear la función en ``entradas.service.ts`` que al ser invocada, envíe los datos a insertar a la API.
 
@@ -486,7 +490,7 @@ insertEntrada(data){
 }
 ~~~
 
-- Ahora importamos en nuestro `insert-peli.component.ts` entrada.service, lo inyectamos en el contructor y creamos la función que le enviara los datos del form
+- Ahora importamos en nuestro `insert-peli.component.ts` EntradasService, lo inyectamos en el contructor y creamos la función que le enviara los datos del form
 
 ~~~
 import { Component, OnInit } from '@angular/core';
@@ -545,7 +549,7 @@ const routes: Routes = [
 ];
 ~~~
 
--Ahora Puedes probar nuestra API en `localhost:3000` y sigue desarrollando y explotando tu **CREATIVIDAD!!!!** 
+-Ahora Puedes probar nuestra API en [localhost:3000] y sigue desarrollando y explotando tu **CREATIVIDAD!!!!** 
 
 # BONUS
 
@@ -614,3 +618,4 @@ a, h1, h4, label{
 [info]: <https://mherman.org/blog/designing-a-restful-api-with-node-and-postgres/>
 [imagen]: <https://pixabay.com/es/admisi%C3%B3n-cup%C3%B3n-admitir-carnaval-2974645/>
 [localhost:3000/api/v1/entradas]: <http://localhost:3000/api/v1/entradas>
+[localhost:3000]: <http://localhost:3000>
