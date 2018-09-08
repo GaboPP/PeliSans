@@ -1,5 +1,5 @@
 var pgp = require("pg-promise")(/*options*/);
-var connection = pgp("postgres://postgres:@host:5432/cine"); 
+var connection = pgp("postgres://postgres:@localhost:5432/cine"); 
 const { Client } = require('pg');
 
 const client = new Client({

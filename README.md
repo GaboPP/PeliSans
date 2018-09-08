@@ -613,4 +613,4 @@ a, h1, h4, label{
 
 [info]: <https://mherman.org/blog/designing-a-restful-api-with-node-and-postgres/>
 [imagen]: <https://pixabay.com/es/admisi%C3%B3n-cup%C3%B3n-admitir-carnaval-2974645/>
-[localhost:3000/api/v1/entradas]: <localhost:3000/api/v1/entradas>
+[localhost:3000/api/v1/entradas]: <http://localhost:3000/api/v1/entradas>
