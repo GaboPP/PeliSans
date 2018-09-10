@@ -6,36 +6,7 @@ Aprendiendo a hacer un feed de películas, para la asignatura Analisis y Diseño
 - Express
 - Angular-Cli
 - Node.js
-# Rutas del Proyecto
--PeliSans
-    -e2e
-    -server
-        -api.js
-        -config.js
-    -src
-        -app
-            -app
-                -card
-                    -feed
-                    -insert-peli
-                    -navbar
-                    -servicios
-                    -app-routing.module.ts
-                    -app.component.css
-                    -app.component.html
-                    -app.component.spec.ts
-                    -app.component.ts
-                    -app.module.ts
-        -assets
-            -images
-                -ticket
-        -environments
-        -index.html
-        -styles.css
-        -archivos
-    -server.js
-    -[].json
-    -README.md
+
 # Creando la nueva aplicación
 Primero creamos la app de Angular desde el terminal con el siguiente código:
 ~~~
@@ -371,27 +342,27 @@ Luego en `card.component.html` insertamos el código de un card de bootsrap (mod
 
 ~~~
 <div class="container">
-<br><br>
-<ul *ngFor="let entrada of Peliculas">
-  <div class="row">
-      <div class="col md-6">
-          <div class="card">
-            <div class="card-header">
-              <h1> {{ entrada.titulo }} </h1>
-            </div>
-            <div class="card-body">
-              <blockquote class="blockquote mb-0">
-                  <p> {{ entrada.comentario }} <p>
-                <footer class="blockquote-footer">Estreno: <cite title="Source Title">
-                  {{ entrada.fecha_estreno | date:'hh:mm dd/MM/yyyy'}} 
-                </cite></footer>
-              </blockquote>
-            </div>
-          </div>
-        </div> 
+  <div class="row align-items-center">
+    <ul *ngFor="let entrada of Peliculas">
       <br>
+      <div class="card-group">
+        <div class="card">
+          <div class="card-header">
+            <h1> {{ entrada.titulo }} </h1>
+          </div>
+          <div class="card-body">
+            <blockquote class="blockquote mb-0">
+                <p> {{ entrada.comentario }} <p>
+              <footer class="blockquote-footer"><small class="text-muted">Estreno:
+                {{ entrada.fecha_estreno | date:'hh:mm dd/MM/yyyy'}} 
+              </small></footer>
+            </blockquote>
+          </div>
+        </div>
+      </div>
+      <br>
+    </ul>
   </div>
-</ul>
 </div>
 ~~~
 
