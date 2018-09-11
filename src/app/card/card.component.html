@@ -1,11 +1,14 @@
 <div class="container">
-  <div class="row align-items-center">
-    <ul *ngFor="let entrada of Peliculas">
-      <br>
-      <div class="card-group">
-        <div class="card">
-          <div class="card-header">
-            <h1> {{ entrada.titulo }} </h1>
+    <br><br>
+    <div class="card-columns">
+    <ul *ngFor="let entrada of Peliculas; let i = index">       
+       
+      <div class="card">
+          <div class="exit"><button class="btn-exit" (click)="delete(i)" onclick="location.reload()"></button> </div>
+          <div class="card-header">            
+            <h3 class="nota">{{entrada.calificacion}}</h3>
+            <h1> {{ entrada.titulo }}               
+            </h1>
           </div>
           <div class="card-body">
             <blockquote class="blockquote mb-0">
@@ -16,8 +19,8 @@
             </blockquote>
           </div>
         </div>
-      </div>
-      <br>
+
     </ul>
-  </div>
+
+    </div>
 </div>

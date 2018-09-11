@@ -14,8 +14,12 @@ export class CardComponent implements OnInit {
   ngOnInit() {
     this.entradasService.getEntradas().subscribe(rows =>{
       this.Peliculas = rows.data;
-      console.log(this.Peliculas);
     });
   }
-
+  private delete(i){
+    this.entradasService.deleteEntrada({
+      "id_peli":this.Peliculas[i].id_peli}).subscribe(res=>{
+        window.alert("Pelicula eliminada");
+      })
+  }
 }

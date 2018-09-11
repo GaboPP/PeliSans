@@ -342,11 +342,10 @@ Luego en `card.component.html` insertamos el código de un card de bootsrap (mod
 
 ~~~
 <div class="container">
-  <div class="row align-items-center">
-    <ul *ngFor="let entrada of Peliculas">
-      <br>
-      <div class="card-group">
-        <div class="card">
+    <br><br>
+    <div class="card-columns">
+    <ul *ngFor="let entrada of Peliculas">       
+      <div class="card">
           <div class="card-header">
             <h1> {{ entrada.titulo }} </h1>
           </div>
@@ -359,10 +358,9 @@ Luego en `card.component.html` insertamos el código de un card de bootsrap (mod
             </blockquote>
           </div>
         </div>
-      </div>
-      <br>
+
     </ul>
-  </div>
+    </div>
 </div>
 ~~~
 
@@ -370,20 +368,20 @@ Y creamos una navbar, para ello sacamos el código de boostrap y lo insertamos e
 
 ~~~
 <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
-    <a class="navbar-brand" href="#">Navbar</a>
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav">
-          <li class="nav-item active">
-            <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link active" href="entradas/new">Ingresar Pelis</a>
-          </li>
-        </ul>
-      </div>
+  <a class="navbar-brand" href="#">PeliSans</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav">
+        <li class="nav-item active">
+          <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link active" href="entradas/new">Ingresar Pelis</a>
+        </li>
+      </ul>
+    </div>
 </nav>
 ~~~
 
@@ -422,6 +420,13 @@ En su html vamos a copiar un form de bootstrap y modificarlo para nuestros fines
             <div class="form-group col-md-6 disenno">
                 <h4>Fecha de Estreno</h4>
                 <input type="date" class="form-control" placeholder="Fecha" [(ngModel)]="Fecha" name="Fecha">
+                <br>
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="form-group col-md-6 disenno">
+                <h4>calificación</h4>
+                <input type="number" min="0" max="10" class="form-control" [(ngModel)]="calif" name="calif">
                 <br>
             </div>
         </div>
@@ -477,13 +482,15 @@ export class InsertPeliComponent implements OnInit {
   Titulo="";
   Comentario="";
   Fecha='0000-00-00';
+  calif="";
   constructor(private entradasService: EntradasService) { }
 
   ngOnInit() {
   }
 
-   private insert(){
-    this.entradasService.insertEntrada({"titulo": this.Titulo,"comentario": this.Comentario,"Fecha":this.Fecha}).subscribe(res=>{
+  private insert(){
+    this.entradasService.insertEntrada({"titulo": this.Titulo,
+      "comentario": this.Comentario,"Fecha":this.Fecha,"calif":this.calif}).subscribe(res=>{
           window.alert("Entrada Ingresada Correctamente");
       });
   }
@@ -494,7 +501,7 @@ export class InsertPeliComponent implements OnInit {
 
 ~~~
 router.post('/entrada',(req, res)=>{
-    var query = "INSERT INTO peliculas (titulo, comentario, fecha_estreno) VALUES('"+req.body.titulo+"', '"+req.body.comentario+"', '"+req.body.Fecha+"')";
+    var query = "INSERT INTO peliculas (titulo, comentario, fecha_estreno, calificacion) VALUES('"+req.body.titulo+"', '"+req.body.comentario+"', '"+req.body.Fecha+"', '"+req.body.calif+"')";
     db.none(query, req.body)
     .then(function () {
       res.status(200)
@@ -535,7 +542,7 @@ Jugaremos con estilos y diseño de la página
 html, body, #fullheight {
     min-height: 100% !important;
     height: 100%;
-    background: url('./assets/images/ticket.jpg');
+    background: url('./assets/images/popcorn.jpg');
     overflow-x: hidden;
 }
 
@@ -543,47 +550,136 @@ p{
     color: rgb(0, 0, 0) !important
 }
 a, h1, h4, label{
-    color: rgb(255, 255, 255) !important
+    color: rgb(255, 255, 255) !important;
 }
+.nota{
+    color: white;
+    z-index: 1001;
+}
+
 .navbar{
     background-color: rgba(255, 115, 0, 0.632) !important;
     color: white;
 }
-.card-header, .card{
-    background-color: rgba(255, 115, 0, 0.632) !important;
-}
-.card-body{
-    background-color: rgb(255, 255, 255) !important;
-}
-.card:hover{
-    -webkit-transform: scale(1.2);
-    -ms-transform: scale(1.2);
-    transform: scale(1.2);
-    transition: 0.15s ease;
-    z-index: 1000;
-  }
-.card:hover,.card-body:hover{
-  
-    background-color: rgb(245, 0, 87);
-    border-color: white;
-    color: white;
-}
-
 .btn{
     margin-left: 20.5%;
-    background-color: rgba(218, 141, 0, 0.849) !important;
+    background-color: rgba(218, 113, 0, 0.849) !important;
     border-color: rgba(218, 141, 0, 0.849);
 }
 .btn:hover{
     background-color: rgba(255, 166, 2, 0.972) !important;
     border-color: rgba(255, 167, 3, 0.849);
 }
-.disenno{
-    background-color: rgba(218, 141, 0, 0.849);
-    padding: 0.7%;
+.exit{
+    text-align: right;
+}
+.btn-exit{
+    border-style: inherit;
+    background-color: rgb(211, 37, 37);
+    color: white;
+    height: 15px;
+    width: 15px;
+    border-radius: 50%;
+    border: 1px solid rgb(255, 248, 248);
+}.btn-exit:hover{
+    background-color: rgb(245, 20, 20);
 }
 
+.disenno{
+    background-color: rgba(233, 127, 27, 0.849);
+    padding: 0.7%;
+    border-radius: .5%;
+    text-align: center;
+}
+.disenno:hover{
+    background-color: rgba(247, 151, 7, 0.939);
+}
+.card-header, .card{
+    background-color: rgba(255, 115, 0, 0.632) !important;
+    text-align: center;
+}
+.card-body{
+    background-color: rgb(255, 255, 255) !important;
+}
+.card{
+    transform: translateY(20px);
+    transition: all .3s;
+    opacity: 0;
+}
+.card.listo{
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.card.listo:hover{
+    -webkit-transform: scale(1.05);
+    -ms-transform: scale(1.05);
+    transform: scale(1.05);
+    transition: .1s ease;
+    z-index: 1000;
+  }
+.card.listo:hover,.card-body:hover{
+  
+    background-color: rgb(245, 0, 87);
+    border-color: white;
+    color: white;
+}
 ~~~
+
+* y este script en index.html
+
+~~~
+<script> 
+      setTimeout(function() {
+        const cards = document.querySelectorAll('.card');
+
+        console.log(cards);
+
+        var card = null;
+
+        for (var i = 0; i < cards.length; i++) {
+          card = cards[i];
+          card.classList.add('listo');
+        }
+      }, 1000);
+  </script>
+~~~
+
+### Delete
+
+Intentaremos borrar las peliculas que no queramos tener, para esto modificamos el html de `card.comonent.hmtl`
+
+~~~
+<div class="container">
+    <br><br>
+    <div class="card-columns">
+    <ul *ngFor="let entrada of Peliculas">       
+       
+      <div class="card">
+          <div class="exit"><button class="btn-exit" (click)="delete()"></button> </div>
+          <div class="card-header">            
+            <h3 class="nota">{{entrada.calificacion}}</h3>
+            <h1> {{ entrada.titulo }}               
+            </h1>
+          </div>
+          <div class="card-body">
+            <blockquote class="blockquote mb-0">
+                <p> {{ entrada.comentario }} <p>
+              <footer class="blockquote-footer"><small class="text-muted">Estreno:
+                {{ entrada.fecha_estreno | date:'hh:mm dd/MM/yyyy'}} 
+              </small></footer>
+            </blockquote>
+          </div>
+        </div>
+
+    </ul>
+
+    </div>
+</div>
+~~~
+* añadimos un boton para borrar el card no deseadp
+
+
 
 
 [info]: <https://mherman.org/blog/designing-a-restful-api-with-node-and-postgres/>

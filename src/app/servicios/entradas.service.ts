@@ -14,5 +14,8 @@ export class EntradasService {
   insertEntrada(data){
     return this.http.post('/api/v1/entrada', data).map(res => res.json());
   }
+  deleteEntrada(data){
+    return this.http.post('/api/v1/entrada_d', data).map(res => res.json());
+  }
 
 }

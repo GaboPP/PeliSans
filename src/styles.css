@@ -4,7 +4,7 @@
 html, body, #fullheight {
     min-height: 100% !important;
     height: 100%;
-    background: url('./assets/images/ticket.jpg');
+    background: url('./assets/images/popcorn.jpg');
     overflow-x: hidden;
 }
 
@@ -12,42 +12,77 @@ p{
     color: rgb(0, 0, 0) !important
 }
 a, h1, h4, label{
-    color: rgb(255, 255, 255) !important
+    color: rgb(255, 255, 255) !important;
 }
+.nota{
+    color: white;
+    z-index: 1001;
+}
+
 .navbar{
     background-color: rgba(255, 115, 0, 0.632) !important;
     color: white;
 }
-.card-header, .card{
-    background-color: rgba(255, 115, 0, 0.632) !important;
-}
-.card-body{
-    background-color: rgb(255, 255, 255) !important;
-}
-.card:hover{
-    -webkit-transform: scale(1.2);
-    -ms-transform: scale(1.2);
-    transform: scale(1.2);
-    transition: 0.15s ease;
-    z-index: 1000;
-  }
-.card:hover,.card-body:hover{
-  
-    background-color: rgb(245, 0, 87);
-    border-color: white;
-    color: white;
-}
-
 .btn{
     margin-left: 20.5%;
-    background-color: rgba(218, 141, 0, 0.849) !important;
+    background-color: rgba(218, 113, 0, 0.849) !important;
     border-color: rgba(218, 141, 0, 0.849);
 }
 .btn:hover{
     background-color: rgba(255, 166, 2, 0.972) !important;
     border-color: rgba(255, 167, 3, 0.849);
 }
+.exit{
+    text-align: right;
+}
+.btn-exit{
+    border-style: inherit;
+    background-color: rgb(211, 37, 37);
+    color: white;
+    height: 15px;
+    width: 15px;
+    border-radius: 50%;
+    border: 1px solid rgb(255, 248, 248);
+}.btn-exit:hover{
+    background-color: rgb(245, 20, 20);
+}
+
 .disenno{
-    background-color: rgba(218, 141, 0, 0.849);
+    background-color: rgba(233, 127, 27, 0.849);
     padding: 0.7%;
+    border-radius: .5%;
+    text-align: center;
+}
+.disenno:hover{
+    background-color: rgba(247, 151, 7, 0.939);
+}
+.card-header, .card{
+    background-color: rgba(255, 115, 0, 0.632) !important;
+    text-align: center;
+}
+.card-body{
+    background-color: rgb(255, 255, 255) !important;
+}
+.card{
+    transform: translateY(20px);
+    transition: all .3s;
+    opacity: 0;
+}
+.card.listo{
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.card.listo:hover{
+    -webkit-transform: scale(1.05);
+    -ms-transform: scale(1.05);
+    transform: scale(1.05);
+    transition: .1s ease;
+    z-index: 1000;
+  }
+.card.listo:hover,.card-body:hover{
+  
+    background-color: rgb(245, 0, 87);
+    border-color: white;
+    color: white;
 }

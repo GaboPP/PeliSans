@@ -24,7 +24,7 @@ router.get('/entradas', (req, res, next) =>{
 });
 
 router.post('/entrada',(req, res)=>{
-    var query = "INSERT INTO peliculas (titulo, comentario, fecha_estreno) VALUES('"+req.body.titulo+"', '"+req.body.comentario+"', '"+req.body.Fecha+"')";
+    var query = "INSERT INTO peliculas (titulo, comentario, fecha_estreno, calificacion) VALUES('"+req.body.titulo+"', '"+req.body.comentario+"', '"+req.body.Fecha+"', '"+req.body.calif+"')";
     db.query(query, function(err, rows){
         if(err){
             res.status(500).send({
@@ -42,5 +42,23 @@ router.post('/entrada',(req, res)=>{
         }
     });
 });
+
+router.post('/entrada_d', (req, res, next) => {
+    var ID = parseInt(req.body.id_peli);
+    db.result( 'DELETE FROM peliculas WHERe id_peli = $1', ID)
+      .then(function (result) {
+        /* jshint ignore:start */
+        res.status(200)
+          .json({
+            status: 'success',
+            message: `Removed ${result.rowCount} peli`
+          });
+        /* jshint ignore:end */
+      })
+      .catch(function (err) {
+        return next(err);
+      });
+  });
+  
 
 module.exports = router;

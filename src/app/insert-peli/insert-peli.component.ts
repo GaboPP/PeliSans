@@ -11,6 +11,7 @@ export class InsertPeliComponent implements OnInit {
   Titulo="";
   Comentario="";
   Fecha='0000-00-00';
+  calif="";
   constructor(private entradasService: EntradasService) { }
 
   ngOnInit() {
@@ -18,7 +19,7 @@ export class InsertPeliComponent implements OnInit {
 
   private insert(){
     this.entradasService.insertEntrada({"titulo": this.Titulo,
-      "comentario": this.Comentario,"Fecha":this.Fecha}).subscribe(res=>{
+      "comentario": this.Comentario,"Fecha":this.Fecha,"calif":this.calif}).subscribe(res=>{
           window.alert("Entrada Ingresada Correctamente");
       });
   }
