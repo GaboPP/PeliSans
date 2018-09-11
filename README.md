@@ -653,10 +653,10 @@ Intentaremos borrar las peliculas que no queramos tener, para esto modificamos e
 <div class="container">
     <br><br>
     <div class="card-columns">
-    <ul *ngFor="let entrada of Peliculas">       
+    <ul *ngFor="let entrada of Peliculas; let i = index">       
        
       <div class="card">
-          <div class="exit"><button class="btn-exit" (click)="delete()"></button> </div>
+          <div class="exit"><button class="btn-exit" (click)="delete(i)" onclick="location.reload()"></button> </div>
           <div class="card-header">            
             <h3 class="nota">{{entrada.calificacion}}</h3>
             <h1> {{ entrada.titulo }}               
@@ -677,7 +677,50 @@ Intentaremos borrar las peliculas que no queramos tener, para esto modificamos e
     </div>
 </div>
 ~~~
-* añadimos un boton para borrar el card no deseadp
+* añadimos un boton para borrar el card no deseado, de dónde se puede notar que rescatamos el index para saber el id de la pelicula.
+
+Ahora modificamos `card.comonent.ts`, creando la función **delete** 
+
+~~~
+
+  private delete(i){
+    console.log(this.Peliculas[i].id_peli);
+    this.entradasService.deleteEntrada({
+      "id_peli":this.Peliculas[i].id_peli}).subscribe(res=>{
+        window.alert("Pelicula eliminada");
+      })
+  }
+~~~
+
+Ahora corresponde ir a  `entradas.service.ts` y agregar la función **deleteEntrada()**
+
+~~~
+  deleteEntrada(data){
+    return this.http.post('/api/v1/entrada_d', data).map(res => res.json());
+  }
+~~~
+
+y por último agregamos la instruccion de express para realizar el **DELETE** en `api.js`:
+
+~~~
+router.post('/entrada_d', (req, res, next) => {
+    var ID = parseInt(req.body.id_peli);
+    db.result( 'DELETE FROM peliculas WHERe id_peli = $1', ID)
+      .then(function (result) {
+        /* jshint ignore:start */
+        res.status(200)
+          .json({
+            status: 'success',
+            message: `Removed ${result.rowCount} peli`
+          });
+        /* jshint ignore:end */
+      })
+      .catch(function (err) {
+        return next(err);
+      });
+  });
+  
+~~~
 
 
 
