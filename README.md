@@ -723,7 +723,10 @@ router.post('/entrada_d', (req, res, next) => {
 ~~~
 
 
+## anotaciones
+http://www.climatedatalibrary.cl/maproom/Monitoring/NDVI/NDVI.html?fbclid=IwAR2k-KsSd6ZuAlKo9A6c7QERjyc3imbJDpd_jAJKQMbUrIJvXCp29fCuofk&region=irids%3ASOURCES%3AFeatures%3APolitical%3AChile%3Acomunas%3Agid%4033%3Ads
 
+https://nassgeodata.gmu.edu/VegScape/?fbclid=IwAR1GJFLrZVdcnjeSOCvLB42M1nmOpb5zi2ML3rcnkX3FAN1smOk_1SGshnM
 
 [info]: <https://mherman.org/blog/designing-a-restful-api-with-node-and-postgres/>
 [imagen]: <https://pixabay.com/es/admisi%C3%B3n-cup%C3%B3n-admitir-carnaval-2974645/>
